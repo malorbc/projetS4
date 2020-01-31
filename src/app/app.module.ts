@@ -10,6 +10,8 @@ import {HttpClientModule } from '@angular/common/http';
 import { AccueilPage } from '../pages/accueil/accueil';
 import { MenuPage } from '../pages/menu/menu';
 
+import {AppService } from '../services/appService';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -35,6 +37,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    AppService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

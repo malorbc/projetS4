@@ -69,7 +69,7 @@ $colors: (
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-
+//@import 'ionic.theme.dark';
 @import "ionic.theme.default";
 
 

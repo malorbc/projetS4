@@ -15,7 +15,7 @@
     <ion-card-content>
       <h1>File de gauche</h1>
       <ion-buttons center>
-        <button ion-button type="submit" color="primary">Voir les repas</button>
+        <button ion-button type="submit" color="primary" (click)="goMenu(1)">Voir les repas</button>
       </ion-buttons>
     </ion-card-content>
   </ion-card>
@@ -23,18 +23,19 @@
     <ion-card-content>
       <h1>File de droite</h1>
       <ion-buttons center>
-        <button ion-button type="submit" color="primary">Voir les repas</button>
+        <button ion-button type="submit" color="primary" (click)="goMenu(0)">Voir les repas</button>
       </ion-buttons>
     </ion-card-content>
   </ion-card>
+  <h2>Historique des repas</h2>
   <ion-list>
     <ion-item *ngFor="let leRepas of repas">
       <h2>{{leRepas.nom}}</h2>
       <h3>{{leRepas.date}}</h3>
+      <ion-badge class="state-0" item-end *ngIf="0 == leRepas.gauche">File de droite</ion-badge>
+      <ion-badge class="state-1" item-end *ngIf="1 == leRepas.gauche">File de gauche</ion-badge>
+      <span class="state-2" *ngIf="1 == leRepas.admin">Créé par l'administrateur</span>
+      <p>Bac n° {{leRepas.numero_bac}}</p>
     </ion-item>
   </ion-list>
-  <button ion-button color="secondary" block (click)="doPrompt()">Ajouter un repas</button>
-  <button ion-button icon-only clear (click)="doPrompt()">
-    <ion-icon name="add-circle"></ion-icon>
-  </button>
 </ion-content>

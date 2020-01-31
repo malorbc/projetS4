@@ -10,6 +10,45 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding color="dark">
+  <h1 *ngIf="this.file == 1">File de gauche</h1>
+  <h1 *ngIf="this.file == 0">File de droite</h1>
+  <!--<div *ngFor="let leRepas of repas">
+    <p *ngIf="this.file == leRepas.gauche">{{leRepas.nom}}</p>
+  </div>-->
 
+  <ion-card>
+    <ion-card-header>
+      Bac n°1
+    </ion-card-header>
+    <div style="position: relative;">
+      <ion-fab right>
+        <button ion-fab (click)="doPrompt(1)">
+          <ion-icon name='add-circle'></ion-icon>
+          <!--<ion-icon name='create'></ion-icon>-->
+        </button>
+      </ion-fab>
+    </div>
+    <ion-item>
+      <h1>Nom du plat</h1>
+      <p>Mis à jour le JJ-MM, HH:mm</p>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Bac n°2
+    </ion-card-header>
+    <div style="position: relative;">
+      <ion-fab right>
+        <button ion-fab (click)="doPrompt(2)">
+          <ion-icon name='add-circle'></ion-icon>
+          <!--<ion-icon name='create'></ion-icon>-->
+        </button>
+      </ion-fab>
+    </div>
+    <ion-item>
+      <h1>Nom du plat</h1>
+      <p>Mis à jour le JJ-MM, HH:mm</p>
+    </ion-item>
+  </ion-card>
 </ion-content>
