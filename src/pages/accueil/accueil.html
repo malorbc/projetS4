@@ -31,7 +31,8 @@
   <ion-list>
     <ion-item *ngFor="let leRepas of repas">
       <h2>{{leRepas.nom}}</h2>
-      <h3>{{leRepas.date}}</h3>
+      <p>{{ leRepas.date | date:'EEEE' :'':'fr-FR' | titlecase }}, {{leRepas.date | date:"HH:mm"}}</p>
+      <!--<h3>{{leRepas.date |date : full }}</h3>-->
       <ion-badge class="state-0" item-end *ngIf="0 == leRepas.gauche">File de droite</ion-badge>
       <ion-badge class="state-1" item-end *ngIf="1 == leRepas.gauche">File de gauche</ion-badge>
       <span class="state-2" *ngIf="1 == leRepas.admin">Créé par l'administrateur</span>

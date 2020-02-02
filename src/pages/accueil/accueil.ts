@@ -30,9 +30,10 @@ export class AccueilPage {
     public alertCtrl: AlertController
   ) {
 
-    httpClient.get('http://localhost/prjtS4/back-end/listeRepas.php')
+    httpClient.get(param.listeRepas)
       .subscribe(data => {
         this.repas = data;
+        
         console.log("données", this.repas);
 
       })

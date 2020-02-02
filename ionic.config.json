@@ -1,5 +1,7 @@
 {
   "name": "projet_s4",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

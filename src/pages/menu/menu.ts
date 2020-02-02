@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { HttpClient } from '@angular/common/http';
-import {param } from '../../param/param';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { param } from '../../param/param';
 //import {AppService} from '../../services/appService';
-import { AccueilPage} from '../accueil/accueil';
+import { AccueilPage } from '../accueil/accueil';
 
 import { AlertController } from 'ionic-angular';
 
@@ -23,7 +23,6 @@ export class MenuPage {
 
   private file;
   private repas;
-  private date;
 
   constructor(
     public navCtrl: NavController,
@@ -34,13 +33,10 @@ export class MenuPage {
 
     this.file = this.navParams.data;
     httpClient.get(param.listeRepas)
-    .subscribe(data=>{
-      this.repas = data;
-      console.log("data", data);
-    })
-
-    this.date = new Date();
-    console.log(JSON.stringify(this.date));
+      .subscribe(data => {
+        this.repas = data;
+        console.log("data", data);
+      })
   }
 
   doPrompt(idBac) {
@@ -71,25 +67,63 @@ export class MenuPage {
     prompt.present();
   }
 
-  creerRepas(data, idBac){
-    console.log("data:",data);
-    console.log("idBac:",idBac)
+  creerRepas(data, idBac) {
+    console.log("data:", data);
+    console.log("idBac:", idBac)
     let repas = data;
     let postData = new FormData();
-    postData.append('nom', repas.nom);
+    let file2 = this.file
 
-    this.httpClient.get(param.getRepas, idBac)
-    .subscribe(data=>{
-      console.log("le repas :",data);
-    })
+    //traitement de la date
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    let dd2;
+    let mm2
+    let yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd2 = '0' + dd;
+    } else {
+      dd2 = dd;
+    }
+    if (mm < 10) {
+      mm2 = '0' + mm;
+    } else {
+      mm2 = mm;
+    }
+    let today2 = yyyy + '-' + mm2 + '-' + dd2 + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    console.log(today2);
+
+    console.log("file de", file2);
+    postData.append('nom', repas.nom);
+    postData.append('numero_bac', idBac);
+    postData.append('gauche', file2);
+    postData.append('date', today2);
+    console.log(JSON.stringify(postData));
+
+
 
     this.httpClient.post(param.creerRepas, postData)
-    .subscribe();
+      .subscribe();
     this.navCtrl.push(AccueilPage);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuPage');
-  }
 
+    let truc = new FormData();
+    truc.append('gauche','1')
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json'
+      })
+    }
+  
+    this.httpClient.post(param.getRepas, "gauche=1")
+    .subscribe(data=>{
+      console.log(data);
+      console.log("test");
+    });
+  }
 }
